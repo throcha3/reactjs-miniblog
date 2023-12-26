@@ -2,11 +2,36 @@ import styles from "./Register.module.css";
 import { useState, useEffect } from "react";
 
 const Register = () => {
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setError("");
+
+    const user = {
+      displayName,
+      email,
+      password,
+    };
+
+    if (password != confirmPassword) {
+      setError("Passwords needs to be equal");
+      return;
+    }
+
+    console.log(user);
+  };
+
   return (
-    <div>
+    <div className={styles.register}>
       <h1>Register yourself to post</h1>
       <p>Create your user and share your stories</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           <span>Name:</span>
           <input
@@ -14,6 +39,8 @@ const Register = () => {
             name="displayName"
             required
             placeholder="Username"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
           ></input>
         </label>
         <label>
@@ -23,6 +50,8 @@ const Register = () => {
             name="email"
             required
             placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           ></input>
         </label>
         <label>
@@ -32,6 +61,8 @@ const Register = () => {
             name="password"
             required
             placeholder="Insert your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           ></input>
         </label>
         <label>
@@ -41,9 +72,12 @@ const Register = () => {
             name="confirmPassword"
             required
             placeholder="Confirm your password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
         </label>
         <button className="btn">Save</button>
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );
