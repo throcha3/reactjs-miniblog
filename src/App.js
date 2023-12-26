@@ -13,8 +13,8 @@ import { AuthProvider } from "./context/AuthContext";
 //pages
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
-import Navbar from "./componentes/Navbar";
-import Footer from "./componentes/Footer";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 
