@@ -19,7 +19,7 @@ const Register = () => {
       password,
     };
 
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       setError("Passwords needs to be equal");
       return;
     }
