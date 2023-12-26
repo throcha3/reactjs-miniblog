@@ -66,6 +66,29 @@ export const useAuthentication = () => {
     signOut(auth);
   };
 
+  const login = async (data) => {
+    checkIfIsCancelled();
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLoading(false);
+    } catch (error) {
+      console.log(error.message);
+      console.log(typeof error.message);
+
+      let systemErrorMessage;
+
+      systemErrorMessage =
+        "An error occurred trying to log in. Please try lil bit later.!";
+
+      setLoading(false);
+      setError(systemErrorMessage);
+    }
+  };
+
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
@@ -76,5 +99,6 @@ export const useAuthentication = () => {
     error,
     loading,
     logout,
+    login,
   };
 };
