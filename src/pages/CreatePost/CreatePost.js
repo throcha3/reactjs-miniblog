@@ -10,37 +10,50 @@ const CreatePost = () => {
   const [image, setImage] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState([]);
-  const [formErrors, setFormErrors] = useState("");
+  const [formError, setFormError] = useState("");
 
   const { user } = useAuthValue();
 
   const { insertDocument, response } = useInsertDocument("posts");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors("");
+    setFormError("");
 
-    //validate img url
+    // validate image
+    try {
+      new URL(image);
+    } catch (error) {
+      console.log("invalid url");
+      setFormError("A imagem precisa ser uma URL.");
+    }
 
-    //create tags array
+    // create tags array
+    const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
-    //check every value
+    // check values
+    if (!title || !image || !tags || !body) {
+      setFormError("U need to fill all inputs");
+    }
+    if (formError) return;
 
     insertDocument({
       title,
       image,
       body,
-      tags,
+      tags: tagsArray,
       uid: user.uid,
       createdBy: user.displayName,
     });
 
-    //redirect
+    navigate("/");
   };
 
   useEffect(() => {
-    console.log(response);
-  }, [response]);
+    console.log(formError);
+  }, [formError]);
 
   return (
     <div className={styles.create_post}>
@@ -90,14 +103,14 @@ const CreatePost = () => {
             value={tags}
           />
         </label>
-        {response && !response.loading && <button className="btn">Save</button>}
-        {response && response.loading && (
+        {!response.loading && <button className="btn">Save</button>}
+        {response.loading && (
           <button className="btn" disabled>
             Wait
           </button>
         )}
-        {response && response.error && (
-          <p className="error">{response.error}</p>
+        {(response.error || formError) && (
+          <p className="error">{response.error || formError}</p>
         )}
       </form>
     </div>
