@@ -37,7 +37,7 @@ function App() {
   }, [auth]);
 
   if (loadingUser) {
-    return <p>Loading...!</p>;
+    return <p>Loading...</p>;
   }
 
   return (
