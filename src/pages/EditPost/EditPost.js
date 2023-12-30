@@ -51,7 +51,7 @@ const EditPost = () => {
 
     // check values
     if (!title || !image || !tags || !body) {
-      setFormError("U need to fill all inputs");
+      setFormError("You need to fill all inputs");
     }
     if (formError) return;
 
