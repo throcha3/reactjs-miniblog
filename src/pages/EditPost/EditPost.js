@@ -43,7 +43,7 @@ const EditPost = () => {
       new URL(image);
     } catch (error) {
       console.log("invalid url");
-      setFormError("A imagem precisa ser uma URL.");
+      setFormError("Image needs to be an URL.");
     }
 
     // create tags array
@@ -101,7 +101,7 @@ const EditPost = () => {
                 value={image}
               />
             </label>
-            <p className={styles.preview_title}>Preview da imagem atual:</p>
+            <p className={styles.preview_title}>Image preview:</p>
             <img
               className={styles.image_preview}
               src={post.image}
