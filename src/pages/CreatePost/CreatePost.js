@@ -29,10 +29,8 @@ const CreatePost = () => {
       setFormError("A imagem precisa ser uma URL.");
     }
 
-    // create tags array
     const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
-    // check values
     if (!title || !image || !tags || !body) {
       setFormError("U need to fill all inputs");
     }
