@@ -22,7 +22,6 @@ const CreatePost = () => {
     e.preventDefault();
     setFormError("");
 
-    // validate image
     try {
       new URL(image);
     } catch (error) {
