@@ -26,13 +26,13 @@ const CreatePost = () => {
       new URL(image);
     } catch (error) {
       console.log("invalid url");
-      setFormError("A imagem precisa ser uma URL.");
+      setFormError("Image needs to be an URL");
     }
 
     const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
     if (!title || !image || !tags || !body) {
-      setFormError("U need to fill all inputs");
+      setFormError("you need to fill all inputs");
     }
     if (formError) return;
 
